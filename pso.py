@@ -10,6 +10,7 @@ iter_num = None
 inertia_weight = 0.7298
 const_vp = 1.49618
 const_vg = 1.49618
+position_max = None
 p = []
 
 fig = plt.figure(1, figsize=(12, 5))
@@ -44,7 +45,7 @@ class Particle:
         self.position = self.position + self.velocity
 
     def get_fitness(self, callback):
-        self.fitness = callback()
+        self.fitness = callback(self.position)
 
     def get_best(self, p_index):
         # get personal best
@@ -52,7 +53,7 @@ class Particle:
             self.best_fitness = self.fitness
             self.best_position = self.position
             print("P[%d]_best updated!!!" % p_index)
-            # get global worst
+              # get global worst
             if self.fitness < Gbest.fitness[0]:
                 Gbest.fitness[0] = self.fitness
                 Gbest.position[0] = self.position
@@ -82,7 +83,7 @@ def spawn():
     return p
 
 
-def draw_learning_curve(save=True):
+def draw_learning_curve(save=False):
     plt.figure(1)
     ax.plot(Gbest.fitness[2::p_qty], c='C0')
     if save:
@@ -91,15 +92,13 @@ def draw_learning_curve(save=True):
     plt.pause(0.3)
 
 
-def iternum(action, fitness_fun=None, save=True):
+def iterate(action, save=False):
     # epoch = 0
     for i in range(iter_num):
         print("--------\nIter %d\n--------" % i)
         for p_index, p_ in enumerate(p):
 
             action(p_)
-            if fitness_fun is not None:
-                p_.get_fitness(fitness_fun)
             print("p[%d]_fitness: %.2f" % (p_index, p_.fitness))
             p_.get_best(p_index)
             # p_.get_g_best()
