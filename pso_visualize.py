@@ -28,7 +28,8 @@ ax.scatter(*goal, s=200, marker='*', c='xkcd:light orange')
 
 
 def action(p_):
-    shift2limit(p_)                       # Constrict particles according Poli, R., Kennedy, J., & Blackwell, T. (2007) [sec 2.4]
+    shift2limit(p_)                       # Constrict particles according /
+    # Poli, R., Kennedy, J., & Blackwell, T. (2007) [sec 2.4]
 
     plt.figure(2)
     points = [p_r.position for p_r in p]
