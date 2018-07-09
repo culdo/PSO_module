@@ -7,9 +7,9 @@ now_date = datetime.datetime.now().strftime("%m%d_%H:%M")
 p_qty = None
 iter_num = None
 
-inertia_weight = 0.6
-const_vp = 0.2
-const_vg = 0.2
+inertia_weight = 0.9
+const_vp = 2
+const_vg = 2
 p = []
 
 fig = plt.figure(1, figsize=(12, 5))
